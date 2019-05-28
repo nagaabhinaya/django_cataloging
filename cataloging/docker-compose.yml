@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: bash -c "python /cataloging/manage.py runserver 0.0.0.0:8000"
+    links:
+      - redis
+    volumes:
+      - .:/cataloging
+    ports:
+      - "8000:8000"
+
+  redis:
+    image: redis
