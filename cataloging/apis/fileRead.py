@@ -1,11 +1,11 @@
 
 from pyspark.sql import SparkSession
 
-
+spark = SparkSession.builder.master("local").appName("cataloging").config("spark.redis.host","localhost").config("spark.redis.port","6379").config("spark.jars","spark-redis-2.4.0-SNAPSHOT-jar-with-dependencies.jar").getOrCreate()
 def read_csv():
     try:
         #initializing sparkSession of pyspark
-        spark = SparkSession.builder.master("local").appName("cataloging").config("spark.redis.host","localhost").config("spark.redis.port","6379").config("spark.jars","/Volumes/Official/Abhinaya/project/shoe-catalog/bin/spark-redis-master/target/spark-redis-2.4.0-SNAPSHOT-jar-with-dependencies.jar").getOrCreate()
+        #spark = SparkSession.builder.master("local").appName("cataloging").config("spark.redis.host","localhost").config("spark.redis.port","6379").config("spark.jars","spark-redis-2.4.0-SNAPSHOT-jar-with-dependencies.jar").getOrCreate()
 
         #reading the given csv file
         catalog_data = spark.read.format('csv').options(header='true', inferSchema='true').load('Datafiniti_Womens_Shoes.csv')

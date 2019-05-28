@@ -1,12 +1,13 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import desc,col,to_date,lower,max
+from pyspark.sql.functions import desc,col,to_date,lower
 from pandas import DataFrame
+from apis import fileRead
 
 #Creating spark session
-spark = SparkSession.builder.master("local").appName("cataloging").config("spark.redis.host","localhost").config("spark.redis.port","6379").config("spark.jars","spark-redis-master/target/spark-redis-2.4.0-SNAPSHOT-jar-with-dependencies.jar").getOrCreate()
+#spark = SparkSession.builder.master("local").appName("cataloging").config("spark.redis.host","localhost").config("spark.redis.port","6379").config("spark.jars","spark-redis-2.4.0-SNAPSHOT-jar-with-dependencies.jar").getOrCreate()
 
 #Read date from redis
-df = spark.read.format("org.apache.spark.sql.redis").option("table", "shoe_catalog").option("key.column", "id").load()
+df = fileRead.spark.read.format("org.apache.spark.sql.redis").option("table", "shoe_catalog").option("key.column", "id").load()
 
 def get_recent_items(date_input):
     try:
