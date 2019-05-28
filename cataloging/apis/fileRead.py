@@ -12,7 +12,7 @@ def read_csv():
         #catalog_data.show()
 
         #building a dataframe with specific columns alone
-        specific_data = catalog_data.select("id","dateAdded","dateUpdated","brand","colors")
+        specific_data = catalog_data.select("id","dateAdded","brand","colors")
         #specific_data.show(2)
 
         #writign date to redis
